@@ -36,6 +36,11 @@ public class Account implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<AccountRole> roles;
 
+    @ManyToMany(mappedBy = "users")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Team> teams;
+
     @ToString.Exclude
     @JsonBackReference
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
