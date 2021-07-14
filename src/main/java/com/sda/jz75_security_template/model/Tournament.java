@@ -22,7 +22,7 @@ public class Tournament {
     String prize;
     String organizer;
     String description;
-    String maximumNumberOfParticipants;
+    Integer maximumNumberOfParticipants;
 
     @Enumerated(EnumType.STRING)
     Category category;
