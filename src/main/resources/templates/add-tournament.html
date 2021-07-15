@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Team Page</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+    <div class="container marketing">
+        <hr>
+        <h2>Add tournament:</h2>
+        <form th:action="@{/tournament/add}" method="post">
+            <div class="row col-12 form-container">
+                <div class="row col-md-12 form-input-row">
+
+                    <div class="col-md-6">
+                        <label for="name">Name:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="name" th:name="name" th:value="${name}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="organizer">Organizer:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="organizer" th:name="organizer" th:value="*{name}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="organizer">Date:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="date" id="date" th:name="date" th:value="*{#dates}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="organizer">Prize:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="prize" th:name="prize" th:value="*{name}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="organizer">Description:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="description" th:name="description"
+                               th:value="*{name}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="organizer">Number of Teams</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="number" id="maximumNumberOfParticipants"
+                               th:name="maximumNumberOfParticipants" th:value="*{#numbers}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="organizer">Category</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="category">
+                            <option th:each="categoryOpt:
+                        ${T(com.sda.tournamentApp.model.Category).values()}"
+                                    th:value="${categoryOpt}" th:text="${categoryOpt.displayValue}">
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row col-md-12">
+                    <button type="submit" class="btn btn-primary offset-3 col-md-6">Submit</button>
+                </div>
+            </div>
+        </form>
+        </hr>
+    </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

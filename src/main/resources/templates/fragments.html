@@ -28,6 +28,9 @@
                             <a class="nav-link" th:href="@{/authenticated}">Authenticated</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" th:href="@{/tournament}">Tournaments</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" th:href="@{/team}">Teams</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasRole('ADMIN')">

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Tournament Index Page</title>
+  <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+  <div class="container marketing">
+    <h2>Tournaments management panel</h2>
+    <ul>
+      <li>
+        <a th:href="@{/tournament/add}">Add tournament</a>
+      </li>
+    </ul>
+    <hr>
+    <h3>Tournaments</h3>
+    <table>
+      <tr th:each="tournament : ${tournaments}">
+        <td th:text="${tournament.id}"></td>
+        <td th:text="${tournament.name}"></td>
+        <td th:text="${tournament.organizer}"></td>
+      </tr>
+    </table>
+    <hr>
+  </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>
