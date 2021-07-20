@@ -22,6 +22,10 @@
         <td th:text="${tournament.id}"></td>
         <td th:text="${tournament.name}"></td>
         <td th:text="${tournament.organizer}"></td>
+        <td>
+          <a th:href="@{/tournament/team/add(tournamentId=${tournament.id})}">Add team</a>
+          <a th:href="@{/tournament/remove(tournamentId=${tournament.id})}">X</a>
+        </td>
       </tr>
     </table>
     <hr>

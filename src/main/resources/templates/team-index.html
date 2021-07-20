@@ -21,6 +21,9 @@
             <tr th:each="team : ${teams}">
                 <td th:text="${team.id}"></td>
                 <td th:text="${team.name}"></td>
+                <td>
+                    <a th:href="@{/team/remove(teamId=${team.id})}">X</a>
+                </td>
             </tr>
         </table>
         <hr>

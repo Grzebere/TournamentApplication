@@ -67,5 +67,13 @@ public class TeamService {
         throw new InvalidIdAddress("No team with that Id in database");
     }
 
+    public void removeTeam(Long teamId) {
+        Optional<Team> teamOptional = teamRepository.findById(teamId);
+        if (teamOptional.isPresent()){
+            teamRepository.deleteById(teamId);
+        } else {
+            throw new InvalidIdAddress("No team with that Id in database");
+        }
+    }
 
 }

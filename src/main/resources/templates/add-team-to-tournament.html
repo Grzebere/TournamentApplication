@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Team Page</title>
+  <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+  <div class="container marketing">
+    <hr>
+    <h2>Add team:</h2>
+    <form th:action="@{/tournament/team/add}" method="post">
+      <div class="row col-12 form-container">
+        <div class="row col-md-12 form-input-row">
+          <div class="col-md-6">
+            <label for="tournament_id">Tournament id:</label>
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" readolny type="text" id="tournament_id" th:name="tournament_id" th:value="${tournament_id}">
+          </div>
+        </div>
+        <div class="row col-md-12 form-input-row">
+          <div class="col-md-6">
+            <label for="tournament_id">Team:</label>
+          </div>
+          <div class="col-md-6">
+            <select class="form-control" name="team_id">
+              <option th:each="team : ${all_available_teams}"
+                      th:text="${team.name}"
+                      th:value="${team.id}">
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row col-md-12 ">
+          <button type="submit" class="btn btn-primary offset-3 col-md-6">Submit</button>
+        </div>
+      </div>
+    </form>
+    </hr>
+  </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

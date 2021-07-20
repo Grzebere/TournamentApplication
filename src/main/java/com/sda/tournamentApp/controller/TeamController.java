@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -41,6 +42,12 @@ public class TeamController {
             }
         }
 
+        return "redirect:/team";
+    }
+
+    @GetMapping("/team/remove")
+    public String removeTeam(@RequestParam Long teamId) {
+        teamService.removeTeam(teamId);
         return "redirect:/team";
     }
 

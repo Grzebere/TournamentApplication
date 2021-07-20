@@ -60,4 +60,31 @@ public class TournamentService {
     public List<Tournament> getAllTournaments() {
         return tournamentRepository.findAll();
     }
+
+    public void removeTournament(Long tournamentId) {
+        Optional<Tournament> tournamentOptional = tournamentRepository.findById(tournamentId);
+        if (tournamentOptional.isPresent()){
+            tournamentRepository.deleteById(tournamentId);
+        } else {
+            throw new InvalidIdAddress("No tournament with that Id in database");
+        }
+    }
+
+    public void removeTeamFromTournament(Long tournamentID, Long teamId) {
+        Optional<Team> teamOptional = teamRepository.findById(teamId);
+        Optional<Tournament> tournamentOptional = tournamentRepository.findById(tournamentID);
+        if (tournamentOptional.isPresent()) {
+            if (teamOptional.isPresent()) {
+                if(tournamentOptional.get().getTeams().contains(teamOptional.get())){
+                    Tournament tournament = tournamentOptional.get();
+                    tournament.getTeams().remove(teamOptional.get());
+                    tournamentRepository.save(tournament);
+                }
+            } else {
+                throw new InvalidIdAddress("No team with that Id in database");
+            }
+        } else {
+            throw new InvalidIdAddress("No tournament with that Id in database");
+        }
+    }
 }
