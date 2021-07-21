@@ -28,16 +28,17 @@ public class TeamService {
                     .name(name)
                     .users(Set.<Account>of(accountOptional.get()))
                     .build());
+        } else {
+            throw new InvalidIdAddress("No account with that Id in database");
         }
     }
 
-    public void addTeammate(Long teamId, Long accountId) {
+    public void addAccountToTeam(Long teamId, Long accountId) {
         Optional<Team> teamOptional = teamRepository.findById(teamId);
         Optional<Account> accountOptional = accountRepository.findById(accountId);
         if (teamOptional.isPresent() && accountOptional.isPresent()) {
             Team team = teamOptional.get();
             team.getUsers().add(accountOptional.get());
-
             teamRepository.save(team);
         }
     }

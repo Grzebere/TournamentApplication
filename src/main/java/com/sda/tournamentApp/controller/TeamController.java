@@ -1,6 +1,7 @@
 package com.sda.tournamentApp.controller;
 
 import com.sda.tournamentApp.model.Account;
+import com.sda.tournamentApp.service.AccountService;
 import com.sda.tournamentApp.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class TeamController {
     private final TeamService teamService;
+    private final AccountService accountService;
 
     @GetMapping("/team")
     public String getTeamsPage(Model model) {
@@ -41,13 +43,25 @@ public class TeamController {
                 teamService.addTeam(name, account.getId());
             }
         }
-
         return "redirect:/team";
     }
 
     @GetMapping("/team/remove")
     public String removeTeam(@RequestParam Long teamId) {
         teamService.removeTeam(teamId);
+        return "redirect:/team";
+    }
+
+    @GetMapping("/team/account/add")
+    public String addAccountToTeamForm(Model model, @RequestParam Long teamId) {
+        model.addAttribute("all_available_accounts", accountService.getAccountList());
+        model.addAttribute("team_id", teamId);
+        return "add-account-to-team";
+    }
+
+    @PostMapping("/team/account/add")
+    public String submitAccountToTeamForm(Long team_id, Long account_id) {
+        teamService.addAccountToTeam(team_id, account_id);
         return "redirect:/team";
     }
 
