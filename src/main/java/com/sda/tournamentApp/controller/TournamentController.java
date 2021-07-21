@@ -71,8 +71,8 @@ public class TournamentController {
     }
 
     @PostMapping("/tournament/team/add")
-    public String submitTeamToTournamentForm(Long tournamentId, Long teamId) {
-        tournamentService.addTeamToTournament(tournamentId, teamId);
+    public String submitTeamToTournamentForm(Long tournament_id, Long team_id) {
+        tournamentService.addTeamToTournament(tournament_id, team_id);
         return "redirect:/tournament";
     }
 }

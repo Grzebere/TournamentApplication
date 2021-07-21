@@ -31,7 +31,7 @@ public class Tournament {
     @Enumerated(EnumType.STRING)
     Category category;
 
-    @ManyToMany(mappedBy = "tournaments")
+    @ManyToMany()
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Team> teams;

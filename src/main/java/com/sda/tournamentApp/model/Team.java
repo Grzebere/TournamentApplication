@@ -18,7 +18,7 @@ public class Team {
 
     private String name;
 
-    @ManyToMany()
+    @ManyToMany(mappedBy = "teams")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Tournament> tournaments;
