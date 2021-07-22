@@ -61,6 +61,10 @@ public class TournamentService {
         return tournamentRepository.findAll();
     }
 
+    public Tournament getTournamentById(Long tournamentId) {
+        return tournamentRepository.findById(tournamentId).get();
+    }
+
     public void removeTournament(Long tournamentId) {
         Optional<Tournament> tournamentOptional = tournamentRepository.findById(tournamentId);
         if (tournamentOptional.isPresent()){
@@ -87,4 +91,7 @@ public class TournamentService {
             throw new InvalidIdAddress("No tournament with that Id in database");
         }
     }
+
+
+
 }

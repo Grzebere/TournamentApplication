@@ -6,8 +6,8 @@ import com.sda.tournamentApp.model.Team;
 import com.sda.tournamentApp.model.Tournament;
 import com.sda.tournamentApp.repository.AccountRepository;
 import com.sda.tournamentApp.repository.TeamRepository;
+import com.sda.tournamentApp.repository.TournamentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.Set;
 public class TeamService {
     private final TeamRepository teamRepository;
     private final AccountRepository accountRepository;
-
+    private final TournamentRepository tournamentRepository;
 
     public void addTeam(String name, Long accountId) {
         Optional<Account> accountOptional = accountRepository.findById(accountId);
@@ -70,11 +70,19 @@ public class TeamService {
 
     public void removeTeam(Long teamId) {
         Optional<Team> teamOptional = teamRepository.findById(teamId);
-        if (teamOptional.isPresent()){
+        if (teamOptional.isPresent()) {
             teamRepository.deleteById(teamId);
         } else {
             throw new InvalidIdAddress("No team with that Id in database");
         }
     }
 
+    public List<Team> getAllTournamentTeams(Long tournamentId) {
+        Optional<Tournament> tournamentOptional = tournamentRepository.findById(tournamentId);
+        if (tournamentOptional.isPresent()) {
+            return teamRepository.findAllByTournaments(tournamentOptional.get());
+        } else {
+            throw new InvalidIdAddress("No tournament with that Id in database");
+        }
+    }
 }

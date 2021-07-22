@@ -10,10 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -74,5 +71,12 @@ public class TournamentController {
     public String submitTeamToTournamentForm(Long tournament_id, Long team_id) {
         tournamentService.addTeamToTournament(tournament_id, team_id);
         return "redirect:/tournament";
+    }
+
+    @GetMapping("/tournament/{id}")
+    public String getTournament(Model model, @PathVariable(name = "id") Long tournamentId) {
+        model.addAttribute("tournamentDetails", tournamentService.getTournamentById(tournamentId));
+        model.addAttribute("tournamentTeams", teamService.getAllTournamentTeams(tournamentId));
+        return "tournament-details";
     }
 }

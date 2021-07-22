@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tournament Index Page</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+    <div class="container marketing">
+        <h3>
+            <td th:text="${tournamentDetails.name}"></td>
+        </h3>
+        <table>
+            <tr>
+                <td th:text="${tournamentDetails.id}"></td>
+                <td th:text="${tournamentDetails.name}"></td>
+                <td th:text="${tournamentDetails.organizer}"></td>
+                <td th:text="${tournamentDetails.category}"></td>
+                <td th:text="${tournamentDetails.date}"></td>
+                <td th:text="${tournamentDetails.description}"></td>
+                <td th:text="${tournamentDetails.maximumNumberOfParticipants}"></td>
+                <td th:text="${tournamentDetails.prize}"></td>
+            </tr>
+        </table>
+            <tr>Teams in tournament</tr>
+          <tr>
+          <table>
+            <tr th:each="team : ${tournamentTeams}">
+                    <td th:text="${team.id}"></td>
+                    <td th:text="${team.name}"></td>
+                </tr>
+          </table>
+          </tr>
+
+        <hr>
+    </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

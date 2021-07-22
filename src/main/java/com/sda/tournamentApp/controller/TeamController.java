@@ -65,5 +65,4 @@ public class TeamController {
         return "redirect:/team";
     }
 
-
 }
