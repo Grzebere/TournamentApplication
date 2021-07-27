@@ -24,6 +24,7 @@
                 <td>
                     <a th:href="@{/team/account/add(teamId=${team.id})}">Add player</a>
                     <a th:href="@{/team/remove(teamId=${team.id})}">X</a>
+                    <a th:href="@{'/team/' + ${team.id}}">Details</a>
                 </td>
             </tr>
         </table>

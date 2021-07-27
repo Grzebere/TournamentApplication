@@ -43,7 +43,7 @@ public class TeamService {
         }
     }
 
-    public void removeTeammate(Long teamId, Long accountId) {
+    /*public void removeTeammate(Long teamId, Long accountId) {
         Optional<Team> teamOptional = teamRepository.findById(teamId);
         Optional<Account> accountOptional = accountRepository.findById(accountId);
         if (teamOptional.isPresent() && accountOptional.isPresent()) {
@@ -54,10 +54,14 @@ public class TeamService {
                 teamRepository.save(team);
             }
         }
-    }
+    }*/
 
     public List<Team> getAllTeams() {
         return teamRepository.findAll();
+    }
+
+    public Team getTeamById(Long teamId) {
+        return teamRepository.findById(teamId).get();
     }
 
     public List<Tournament> getTournamentListForTeam(Long teamId) {
@@ -85,4 +89,6 @@ public class TeamService {
             throw new InvalidIdAddress("No tournament with that Id in database");
         }
     }
+
+
 }

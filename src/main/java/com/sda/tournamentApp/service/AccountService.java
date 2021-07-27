@@ -1,12 +1,11 @@
 package com.sda.tournamentApp.service;
 
+import com.sda.tournamentApp.exception.InvalidIdAddress;
 import com.sda.tournamentApp.exception.InvalidRegisterData;
-import com.sda.tournamentApp.model.Account;
-import com.sda.tournamentApp.model.AccountRole;
-import com.sda.tournamentApp.model.CreateAccountRequest;
-import com.sda.tournamentApp.model.RolesDto;
+import com.sda.tournamentApp.model.*;
 import com.sda.tournamentApp.repository.AccountRepository;
 import com.sda.tournamentApp.repository.AccountRoleRepository;
+import com.sda.tournamentApp.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,7 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountRoleRepository accountRoleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final TeamRepository teamRepository;
 
     public List<Account> getAccountList() {
         return accountRepository.findAll();
@@ -100,5 +100,14 @@ public class AccountService {
             }
         }
         // jeśli nie return'ował to znaczy że roli nie ma
+    }
+
+    public List<Account> getAllTeamAccounts(Long teamId) {
+        Optional<Team> teamOptional = teamRepository.findById(teamId);
+        if (teamOptional.isPresent()) {
+            return accountRepository.findAllByTeams(teamOptional.get());
+        } else {
+            throw new InvalidIdAddress("No team with that Id in database");
+        }
     }
 }

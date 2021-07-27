@@ -73,8 +73,10 @@ public class TournamentController {
         return "redirect:/tournament";
     }
 
+
+    // Wychodzi zapytanie ze /?{id}
     @GetMapping("/tournament/{id}")
-    public String getTournament(Model model, @PathVariable(name = "id") Long tournamentId) {
+    public String getTournamentDetails(Model model, @PathVariable(name = "id") Long tournamentId) {
         model.addAttribute("tournamentDetails", tournamentService.getTournamentById(tournamentId));
         model.addAttribute("tournamentTeams", teamService.getAllTournamentTeams(tournamentId));
         return "tournament-details";

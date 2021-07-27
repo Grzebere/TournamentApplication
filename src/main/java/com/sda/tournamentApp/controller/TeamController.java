@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -64,5 +61,13 @@ public class TeamController {
         teamService.addAccountToTeam(team_id, account_id);
         return "redirect:/team";
     }
+
+    @GetMapping("/team/{id}")
+    public String getTeamDetails(Model model, @PathVariable(name= "id") Long teamId) {
+        model.addAttribute("teamDetails", teamService.getTeamById(teamId));
+        model.addAttribute("teamAccounts", accountService.getAllTeamAccounts(teamId));
+        return "team-details";
+    }
+
 
 }

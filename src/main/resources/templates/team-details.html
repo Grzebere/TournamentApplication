@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Team Details</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+    <div class="container marketing">
+        <h3>
+            <td th:text="${teamDetails.name}"></td>
+        </h3>
+        <table>
+            <tr>
+                <td th:text="${teamDetails.id}"></td>
+                <td th:text="${teamDetails.name}"></td>
+            </tr>
+        </table>
+        <tr>Teammates:</tr>
+        <tr>
+            <table>
+                <tr th:each="account : ${teamAccounts}">
+                    <td th:text="${account.username}"></td>
+                </tr>
+            </table>
+        </tr>
+
+        <hr>
+    </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>
