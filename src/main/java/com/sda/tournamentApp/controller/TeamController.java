@@ -69,5 +69,11 @@ public class TeamController {
         return "team-details";
     }
 
+    @GetMapping("/team/{id}/remove")
+    public String removeTeammate(@RequestParam Long team_id, Long account_id) {
+        teamService.removeTeammate(team_id, account_id);
+        return "redirect:/team";
+    }
+
 
 }

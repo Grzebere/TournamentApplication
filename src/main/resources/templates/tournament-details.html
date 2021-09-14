@@ -13,6 +13,19 @@
             <td th:text="${tournamentDetails.name}"></td>
         </h3>
         <table>
+            <thread>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Organizer</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Max. Teams</th>
+                    <th>Prize</th>
+                </tr>
+            </thread>
+            <tbody>
             <tr>
                 <td th:text="${tournamentDetails.id}"></td>
                 <td th:text="${tournamentDetails.name}"></td>
@@ -23,8 +36,9 @@
                 <td th:text="${tournamentDetails.maximumNumberOfParticipants}"></td>
                 <td th:text="${tournamentDetails.prize}"></td>
             </tr>
+            </tbody>
         </table>
-            <tr>Teams in tournament</tr>
+            <tr>Teams in tournament:</tr>
           <tr>
           <table>
             <tr th:each="team : ${tournamentTeams}">

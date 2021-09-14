@@ -10,6 +10,7 @@ import com.sda.tournamentApp.repository.TournamentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -43,7 +44,7 @@ public class TeamService {
         }
     }
 
-    /*public void removeTeammate(Long teamId, Long accountId) {
+    public void removeTeammate(Long teamId, Long accountId) {
         Optional<Team> teamOptional = teamRepository.findById(teamId);
         Optional<Account> accountOptional = accountRepository.findById(accountId);
         if (teamOptional.isPresent() && accountOptional.isPresent()) {
@@ -54,7 +55,7 @@ public class TeamService {
                 teamRepository.save(team);
             }
         }
-    }*/
+    }
 
     public List<Team> getAllTeams() {
         return teamRepository.findAll();

@@ -22,7 +22,10 @@
         <tr>
             <table>
                 <tr th:each="account : ${teamAccounts}">
-                    <td th:text="${account.username}"></td>
+                    <td>
+                    <a th:text="${account.username}"></a>
+                    <a th:href="@{/team/${teamDetails.id}/remove(team_id=${teamDetails.id}, account_id=${account.id})}">X</a>
+                    </td>
                 </tr>
             </table>
         </tr>
