@@ -2,6 +2,7 @@ package com.sda.tournamentApp.controller;
 
 import com.sda.tournamentApp.model.Account;
 import com.sda.tournamentApp.model.Category;
+import com.sda.tournamentApp.service.PhaseService;
 import com.sda.tournamentApp.service.TeamService;
 import com.sda.tournamentApp.service.TournamentService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class TournamentController {
     private final TournamentService tournamentService;
+    private final PhaseService phaseService;
     private final TeamService teamService;
 
     @GetMapping("/tournament")
@@ -81,4 +83,13 @@ public class TournamentController {
         model.addAttribute("tournamentTeams", teamService.getAllTournamentTeams(tournamentId));
         return "tournament-details";
     }
+
+    @GetMapping("/tournament/{id}/start")
+    public String startTournament(Model model, @PathVariable(name = "id") Long tournamentId) {
+        tournamentService.addPhaseToTournament(tournamentId, phaseService.addPhase(tournamentId).getId());
+        return "redirect:/tournament";
+    }
+
+
+
 }

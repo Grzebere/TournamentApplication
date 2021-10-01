@@ -27,6 +27,7 @@ public class TeamService {
         if (accountOptional.isPresent()) {
             teamRepository.save(Team.builder()
                     .name(name)
+                    // adding user when creating team
                     .users(Set.<Account>of(accountOptional.get()))
                     .build());
         } else {

@@ -2,6 +2,7 @@ package com.sda.tournamentApp.service;
 
 import com.sda.tournamentApp.exception.InvalidIdAddress;
 import com.sda.tournamentApp.model.Category;
+import com.sda.tournamentApp.model.Phase;
 import com.sda.tournamentApp.model.Team;
 import com.sda.tournamentApp.model.Tournament;
 import com.sda.tournamentApp.repository.GameRepository;
@@ -48,6 +49,22 @@ public class TournamentService {
             if (teamOptional.isPresent()) {
                 Tournament tournament = tournamentOptional.get();
                 tournament.getTeams().add(teamOptional.get());
+                tournamentRepository.save(tournament);
+            } else {
+                throw new InvalidIdAddress("No team with that Id in database");
+            }
+        } else {
+            throw new InvalidIdAddress("No tournament with that Id in database");
+        }
+    }
+
+    public void addPhaseToTournament(Long tournamentID, Long phaseId){
+        Optional<Phase> phaseOptional = phaseRepository.findById(phaseId);
+        Optional<Tournament> tournamentOptional = tournamentRepository.findById(tournamentID);
+        if (tournamentOptional.isPresent()) {
+            if (phaseOptional.isPresent()) {
+                Tournament tournament = tournamentOptional.get();
+                tournament.getPhases().add(phaseOptional.get());
                 tournamentRepository.save(tournament);
             } else {
                 throw new InvalidIdAddress("No team with that Id in database");

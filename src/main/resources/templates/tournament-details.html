@@ -36,6 +36,9 @@
                 <td th:text="${tournamentDetails.maximumNumberOfParticipants}"></td>
                 <td th:text="${tournamentDetails.prize}"></td>
             </tr>
+            <td>
+                <a th:href="@{'/tournament/' + ${tournamentDetails.id} + '/start'}">Start</a>
+            </td>
             </tbody>
         </table>
             <tr>Teams in tournament:</tr>
